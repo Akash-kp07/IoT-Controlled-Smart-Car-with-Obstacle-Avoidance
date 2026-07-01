@@ -1,166 +1,85 @@
-\## 🎯 Ball Balancing Robot (3-DOF Platform)
+# IoT Controlled Smart Car with Obstacle Avoidance
 
+Wi-Fi controlled car built on NodeMCU (ESP8266). Drives manually through a
+browser-based control panel, or switches to an autonomous **Smart Mode** that
+avoids obstacles using an ultrasonic sensor — no external app or cloud
+dependency, fully self-hosted on the microcontroller.
 
+## Features
 
-\## 📌 Overview
+- **Manual control** — on-screen D-pad served directly from the NodeMCU, works on any phone/laptop connected to its Wi-Fi AP
+- **Live distance readout** — ultrasonic sensor polled every 100ms, streamed to the UI
+- **Obstacle safety cutoff** — forward motion auto-stops if an obstacle is inside threshold range, even in manual mode
+- **Smart Mode** — fully autonomous navigation: drives forward, detects obstacles, reverses, turns, and re-engages — no user input required
 
+## Hardware
 
+| Component | Role |
+|---|---|
+| NodeMCU ESP8266 | Wi-Fi microcontroller, hosts web server + control logic |
+| L298N Motor Driver | Drives both DC motors (speed + direction) |
+| DC Motors (x2) | Left/right drive wheels |
+| HC-SR04 Ultrasonic Sensor | Distance measurement for obstacle detection |
+| 2x 3.7V Li-ion cells (series) | Power for motors + NodeMCU |
+| Chassis | Frame housing all components |
 
-A real-time ball balancing system using a 3-servo parallel platform.
+## How it works
 
-The system uses computer vision (OpenCV) to detect the ball position and PID control to stabilize it.
+NodeMCU boots into Access Point mode (`NodeMCU Car`) and hosts a web server.
+Connect to the AP, open the NodeMCU's IP in a browser, and the control panel
+loads — no app install needed.
 
+- **Manual mode:** touch/click D-pad buttons → HTTP request → motor driver pins toggled directly
+- **Obstacle avoidance (manual mode):** ultrasonic distance checked every 100ms; forward command is blocked if distance < 20cm
+- **Smart Mode:** toggled via UI switch. Car drives forward continuously; on obstacle detection it stops, reverses briefly, turns a random direction, then resumes — a simple reactive avoidance loop, no path planning
 
-
-\---
-
-
-
-\## ⚙️ System Architecture
-
-
-
-\* 🎥 Raspberry Pi → Vision processing (OpenCV)
-
-\* 🧠 Arduino Nano → Servo control
-
-\* 🔁 PID Control → Stability system
-
-\* ⚡ MG995 Servos → Platform actuation
-
-
-
-\---
-
-
-
-\## 🧰 Hardware Components
-
-
-
-\* Arduino Nano
-
-\* Raspberry Pi
-
-\* 3x MG995 Servo Motors
-
-\* USB Camera
-
-\* Buck Converter (6V output)
-
-\* 12V Li-Po Battery
-
-\* Resistive Touch Plate / Ball Platform
-
-
-
-\---
-
-
-
-\## 🧠 Working Principle
-
-
-
-1\. Camera captures ball position
-
-2\. OpenCV calculates (X, Y) error
-
-3\. PID controller computes correction
-
-4\. Arduino adjusts servo angles
-
-5\. Platform tilts to stabilize ball
-
-
-
-\---
-
-
-
-\## 📂 Project Structure
-
-
+## Repo structure
 
 ```
-
-arduino/         → Servo + PID execution
-
-raspberry\_pi/    → OpenCV + ball tracking
-
-cad/             → Mechanical design (STL, Onshape)
-
-electronics/     → Circuit diagrams
-
-docs/            → Documentation
-
-images/          → Photos \& results
-
+smart-car/
+├── src/
+│   └── smart_car.ino     # Full firmware — motor control, ultrasonic, web server, UI
+├── docs/
+│   └── IoT_Controlled_Smart_Car_Report.pdf   # Project report
+└── README.md
 ```
 
+## Pin mapping
 
+| Function | GPIO | NodeMCU Pin |
+|---|---|---|
+| Right motor speed (ENA) | 14 | D5 |
+| Left motor speed (ENB) | 12 | D6 |
+| Right motor dir 1 | 13 | D7 |
+| Right motor dir 2 | 15 | D8 |
+| Left motor dir 1 | 0 | D3 |
+| Left motor dir 2 | 2 | D4 |
+| Ultrasonic TRIG | 5 | D1 |
+| Ultrasonic ECHO | 4 | D2 |
 
-\---
+## Setup
 
+1. Flash `src/smart_car.ino` to NodeMCU via Arduino IDE (board: `NodeMCU 1.0 (ESP8266-12E Module)`)
+2. Required libraries: `ESP8266WiFi`, `ESP8266WebServer` (bundled with ESP8266 board package)
+3. Power on — NodeMCU broadcasts Wi-Fi AP `NodeMCU Car`
+4. Connect phone/laptop to that AP
+5. Open `192.168.4.1` in browser
+6. Drive manually, or flip Smart Mode on for autonomous navigation
 
+## Limitations
 
-\## 🚀 Features
+- Smart Mode's obstacle avoidance is reactive, not planned — no mapping, no path optimization, random turn direction on obstacle detection
+- Single ultrasonic sensor = no side/rear awareness; blind spots exist
+- No PID or closed-loop speed control — open-loop PWM only
 
+## Future scope
 
+- GPS integration for location tracking
+- Camera module for live streaming / vision-based navigation
+- Cloud connectivity for remote monitoring outside local Wi-Fi range
+- Multiple ultrasonic sensors or LIDAR for 360° obstacle awareness
 
-\* Real-time ball tracking
+## Author
 
-\* PID-based stabilization
-
-\* 3-axis parallel mechanism
-
-\* Modular hardware design
-
-
-
-\---
-
-
-
-\## ⚠️ Challenges
-
-
-
-\* Servo jitter (MG995 limitation)
-
-\* PID tuning complexity
-
-\* Camera latency
-
-
-
-\---
-
-
-
-\## 🔮 Future Improvements
-
-
-
-\* Upgrade to digital metal gear servos (ST3215)
-
-\* Faster camera processing
-
-\* Kalman filtering
-
-\* Closed-loop feedback optimization
-
-
-
-\---
-
-
-
-\## 👨‍💻 Author
-
-
-
-Akash
-
-
-
+Akash KP — Embedded Systems & Robotics
+[LinkedIn] · [GitHub](https://github.com/Akash-kp07)
