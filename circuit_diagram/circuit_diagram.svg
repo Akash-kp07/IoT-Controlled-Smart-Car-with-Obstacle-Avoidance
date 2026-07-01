@@ -1,0 +1,84 @@
+<svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg" font-family="Courier New, monospace">
+  <rect width="900" height="620" fill="#ffffff"/>
+
+  <!-- Title block, plain text, no styling flourish -->
+  <text x="20" y="30" fill="#000000" font-size="14" font-weight="bold">NodeMCU Smart Car - Wiring Diagram</text>
+  <line x1="20" y1="40" x2="880" y2="40" stroke="#000000" stroke-width="1"/>
+
+  <!-- NodeMCU block -->
+  <rect x="60" y="110" width="180" height="340" fill="none" stroke="#000000" stroke-width="1.5"/>
+  <text x="150" y="130" text-anchor="middle" fill="#000000" font-size="13" font-weight="bold">NodeMCU ESP8266</text>
+  <line x1="60" y1="140" x2="240" y2="140" stroke="#000000" stroke-width="1"/>
+
+  <text x="75" y="165" fill="#000000" font-size="11">D5 (GPIO14) --- ENA</text>
+  <text x="75" y="188" fill="#000000" font-size="11">D6 (GPIO12) --- ENB</text>
+  <text x="75" y="211" fill="#000000" font-size="11">D7 (GPIO13) --- IN1</text>
+  <text x="75" y="234" fill="#000000" font-size="11">D8 (GPIO15) --- IN2</text>
+  <text x="75" y="257" fill="#000000" font-size="11">D3 (GPIO0)  --- IN3</text>
+  <text x="75" y="280" fill="#000000" font-size="11">D4 (GPIO2)  --- IN4</text>
+  <line x1="75" y1="295" x2="225" y2="295" stroke="#000000" stroke-width="0.5"/>
+  <text x="75" y="318" fill="#000000" font-size="11">D1 (GPIO5)  --- TRIG</text>
+  <text x="75" y="341" fill="#000000" font-size="11">D2 (GPIO4)  --- ECHO</text>
+  <line x1="75" y1="356" x2="225" y2="356" stroke="#000000" stroke-width="0.5"/>
+  <text x="75" y="379" fill="#000000" font-size="11">VIN --- 5V in</text>
+  <text x="75" y="402" fill="#000000" font-size="11">GND --- common gnd</text>
+
+  <!-- L298N block -->
+  <rect x="380" y="90" width="200" height="220" fill="none" stroke="#000000" stroke-width="1.5"/>
+  <text x="480" y="110" text-anchor="middle" fill="#000000" font-size="13" font-weight="bold">L298N Driver</text>
+  <line x1="380" y1="120" x2="580" y2="120" stroke="#000000" stroke-width="1"/>
+  <text x="395" y="143" fill="#000000" font-size="11">ENA / ENB in</text>
+  <text x="395" y="166" fill="#000000" font-size="11">IN1 - IN4 in</text>
+  <line x1="395" y1="180" x2="565" y2="180" stroke="#000000" stroke-width="0.5"/>
+  <text x="395" y="203" fill="#000000" font-size="11">OUT1/OUT2 -&gt; R motor</text>
+  <text x="395" y="226" fill="#000000" font-size="11">OUT3/OUT4 -&gt; L motor</text>
+  <line x1="395" y1="240" x2="565" y2="240" stroke="#000000" stroke-width="0.5"/>
+  <text x="395" y="263" fill="#000000" font-size="11">12V in (battery)</text>
+  <text x="395" y="286" fill="#000000" font-size="11">5V out -&gt; NodeMCU VIN</text>
+
+  <!-- HC-SR04 block -->
+  <rect x="380" y="350" width="200" height="100" fill="none" stroke="#000000" stroke-width="1.5"/>
+  <text x="480" y="370" text-anchor="middle" fill="#000000" font-size="13" font-weight="bold">HC-SR04</text>
+  <line x1="380" y1="380" x2="580" y2="380" stroke="#000000" stroke-width="1"/>
+  <text x="395" y="403" fill="#000000" font-size="11">TRIG / ECHO</text>
+  <text x="395" y="426" fill="#000000" font-size="11">VCC 5V / GND</text>
+
+  <!-- Right motor -->
+  <rect x="680" y="90" width="160" height="70" fill="none" stroke="#000000" stroke-width="1.5"/>
+  <text x="760" y="130" text-anchor="middle" fill="#000000" font-size="12">Right Motor</text>
+
+  <!-- Left motor -->
+  <rect x="680" y="220" width="160" height="70" fill="none" stroke="#000000" stroke-width="1.5"/>
+  <text x="760" y="260" text-anchor="middle" fill="#000000" font-size="12">Left Motor</text>
+
+  <!-- Battery -->
+  <rect x="380" y="480" width="200" height="80" fill="none" stroke="#000000" stroke-width="1.5"/>
+  <text x="480" y="503" text-anchor="middle" fill="#000000" font-size="12" font-weight="bold">2x 3.7V Li-ion (series)</text>
+  <text x="480" y="526" text-anchor="middle" fill="#000000" font-size="11">7.4V pack</text>
+
+  <!-- Orthogonal connectors: NodeMCU -> L298N -->
+  <path d="M 240 160 L 320 160 L 320 145 L 380 145" fill="none" stroke="#000000" stroke-width="1"/>
+  <path d="M 240 183 L 300 183 L 300 165 L 380 165" fill="none" stroke="#000000" stroke-width="1"/>
+  <path d="M 240 206 L 280 206 L 280 185 L 380 185" fill="none" stroke="#000000" stroke-width="1"/>
+  <path d="M 240 229 L 260 229 L 260 205 L 380 205" fill="none" stroke="#000000" stroke-width="1"/>
+
+  <!-- NodeMCU -> HC-SR04 -->
+  <path d="M 240 318 L 300 318 L 300 391 L 380 391" fill="none" stroke="#000000" stroke-width="1"/>
+  <path d="M 240 341 L 320 341 L 320 413 L 380 413" fill="none" stroke="#000000" stroke-width="1"/>
+
+  <!-- L298N -> Motors -->
+  <path d="M 580 145 L 630 145 L 630 125 L 680 125" fill="none" stroke="#000000" stroke-width="1"/>
+  <path d="M 580 205 L 630 205 L 630 255 L 680 255" fill="none" stroke="#000000" stroke-width="1"/>
+
+  <!-- Battery -> L298N -->
+  <path d="M 480 480 L 480 310" fill="none" stroke="#000000" stroke-width="1.5"/>
+  <text x="490" y="400" fill="#000000" font-size="10">7.4V</text>
+
+  <!-- Battery -> NodeMCU (regulated feed, dashed) -->
+  <path d="M 380 500 L 150 500 L 150 450" fill="none" stroke="#000000" stroke-width="1" stroke-dasharray="5,4"/>
+  <text x="155" y="480" fill="#000000" font-size="10">reg. 5V (dashed)</text>
+
+  <!-- Ground note -->
+  <text x="60" y="580" fill="#000000" font-size="10">Note: common ground shared across NodeMCU, L298N, HC-SR04 (not drawn per-wire)</text>
+  <text x="60" y="600" fill="#000000" font-size="10">Pin mapping matches src/smart_car.ino</text>
+</svg>
