@@ -36,11 +36,11 @@ loads — no app install needed.
 ## Repo structure
 
 ```
-smart-car/
-├── src/
-│   └── smart_car.ino     # Full firmware — motor control, ultrasonic, web server, UI
-├── docs/
-│   └── IoT_Controlled_Smart_Car_Report.pdf   # Project report
+├── arduino/
+│   └── smart_car.ino
+├── circuit_diagram/
+│   └── circuit_diagram.svg
+├── images/
 └── README.md
 ```
 
