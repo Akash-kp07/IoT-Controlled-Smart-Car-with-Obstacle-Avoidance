@@ -78,8 +78,3 @@ smart-car/
 - Camera module for live streaming / vision-based navigation
 - Cloud connectivity for remote monitoring outside local Wi-Fi range
 - Multiple ultrasonic sensors or LIDAR for 360° obstacle awareness
-
-## Author
-
-Akash KP — Embedded Systems & Robotics
-[LinkedIn] · [GitHub](https://github.com/Akash-kp07)
